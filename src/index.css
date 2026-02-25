@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Syne", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-bg: #0D0D0D;
+  --color-brand-surface: #161616;
+  --color-brand-text: #ffffff;
+  --color-brand-muted: #888888;
+  --color-brand-accent: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-text font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden;
+  }
+}
+
+.text-reveal {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+}
+
+/* Game UI Progress Bar */
+.level-bar-container {
+  @apply w-full h-2 bg-white/5 rounded-none overflow-hidden relative border border-white/10;
+}
+
+.level-bar-fill {
+  @apply h-full bg-white absolute left-0 top-0;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.level-tag {
+  @apply text-[10px] uppercase tracking-widest font-bold px-2 py-0.5 bg-white text-black mb-2 inline-block;
+}
+
+/* Horizontal Scroll Helpers */
+.horizontal-scroll-section {
+  height: 400vh; /* Adjust based on content length */
+}
+
+.sticky-wrapper {
+  @apply sticky top-0 h-screen flex items-center overflow-hidden;
+}
+
+.horizontal-track {
+  @apply flex gap-12 px-[10vw];
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
