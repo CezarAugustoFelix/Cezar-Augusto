@@ -55,7 +55,7 @@ const Navbar = () => {
         </motion.div>
         
         <div className="hidden md:flex gap-10 items-center">
-          {["Works", "Arsenal", "Vision", "Touch"].map((item, i) => (
+          {["Works", "Arsenal", "Touch"].map((item, i) => (
             <motion.a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -105,6 +105,41 @@ const Hero = () => (
   </section>
 );
 
+const ProjectItem = ({ project }: { project: typeof PROJECTS[0] }) => {
+  const itemRef = useRef(null);
+  const { scrollYProgress: itemProgress } = useScroll({
+    target: itemRef,
+    offset: ["start end", "end start"]
+  });
+
+  const blurValue = useTransform(itemProgress, [0, 0.5, 1], ["20px", "0px", "20px"]);
+  const scaleValue = useTransform(itemProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const opacityValue = useTransform(itemProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+
+  return (
+    <motion.div
+      ref={itemRef}
+      style={{ 
+        filter: `blur(${blurValue.get()})`, 
+        scale: scaleValue,
+        opacity: opacityValue 
+      }}
+      className="project-card group flex-shrink-0"
+    >
+      <img 
+        src={project.thumbnail} 
+        alt={project.title} 
+        className="project-image"
+        loading="lazy" 
+      />
+      <div className="project-info">
+        <span className="level-tag">{project.category}</span>
+        <h3 className="text-2xl font-display font-bold uppercase">{project.title}</h3>
+      </div>
+    </motion.div>
+  );
+};
+
 const HorizontalGallery = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
@@ -120,46 +155,14 @@ const HorizontalGallery = () => {
               The <br /> <span className="text-white/30 italic">Gallery</span>
             </h2>
           </div>
-          
-          {PROJECTS.map((project, index) => {
-  // Criamos um hook de referência para cada imagem individualmente
-  const itemRef = useRef(null);
-  const { scrollYProgress: itemProgress } = useScroll({
-    target: itemRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Efeito de Blur: Começa em 20px, fica 0px no centro da tela, e volta para 20px na saída
-  const blurValue = useTransform(itemProgress, [0, 0.5, 1], ["20px", "0px", "20px"]);
-  // Efeito de Escala: Começa menor e cresce quando chega no centro
-  const scaleValue = useTransform(itemProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
-  // Opacidade: Aparece suavemente
-  const opacityValue = useTransform(itemProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-
-  return (
-    <motion.div
-      key={project.id}
-      ref={itemRef}
-      style={{ 
-        filter: `blur(${blurValue.get()})`, 
-        scale: scaleValue,
-        opacity: opacityValue 
-      }}
-      className="project-card group"
-    >
-      <img 
-        src={project.thumbnail} 
-        alt={project.title} 
-        className="project-image"
-        loading="lazy" 
-      />
-      <div className="project-info">
-        <span className="level-tag">{project.category}</span>
-        <h3 className="text-2xl font-display font-bold uppercase">{project.title}</h3>
+          {PROJECTS.map((project) => (
+            <ProjectItem key={project.id} project={project} />
+          ))}
+        </motion.div>
       </div>
-    </motion.div>
+    </section>
   );
-})}
+};
 
 const SkillItem = ({ skill, index }: { skill: typeof SKILLS[0], index: number }) => {
   const ref = useRef(null);
