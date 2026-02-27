@@ -107,10 +107,44 @@ const Hero = () => (
 
 const ProjectItem = ({ project }: { project: typeof PROJECTS[0] }) => {
   const itemRef = useRef(null);
+  
+  // O segredo está no offset: "target" (a imagem) em relação ao "container" (a tela)
   const { scrollYProgress: itemProgress } = useScroll({
     target: itemRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"] 
   });
+
+  // Ajustamos os valores: 
+  // 0.2 (entrando) -> Blur 15px
+  // 0.5 (centro da tela) -> Blur 0px (Nítido)
+  // 0.8 (saindo) -> Blur 15px
+  const blurValue = useTransform(itemProgress, [0.1, 0.5, 0.9], ["15px", "0px", "15px"]);
+  const scaleValue = useTransform(itemProgress, [0.1, 0.5, 0.9], [0.85, 1, 0.85]);
+  const opacityValue = useTransform(itemProgress, [0.1, 0.3, 0.7, 0.9], [0, 1, 1, 0]);
+
+  return (
+    <motion.div
+      ref={itemRef}
+      style={{ 
+        filter: useTransform(blurValue, (v) => `blur(${v})`), 
+        scale: scaleValue,
+        opacity: opacityValue 
+      }}
+      className="project-card group flex-shrink-0"
+    >
+      <img 
+        src={project.thumbnail} 
+        alt={project.title} 
+        className="project-image"
+        loading="lazy" 
+      />
+      <div className="project-info">
+        <span className="level-tag">{project.category}</span>
+        <h3 className="text-2xl font-display font-bold uppercase">{project.title}</h3>
+      </div>
+    </motion.div>
+  );
+};
 
   const blurValue = useTransform(itemProgress, [0, 0.5, 1], ["20px", "0px", "20px"]);
   const scaleValue = useTransform(itemProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
