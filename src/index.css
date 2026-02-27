@@ -66,7 +66,7 @@
 .text-outline {
   color: transparent !important;
   -webkit-text-stroke: 1px #FFFFFF;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Syne', sans-serif; /* Use a fonte Syne se estiver instalada */
   font-weight: 800;
   text-transform: uppercase;
 }
