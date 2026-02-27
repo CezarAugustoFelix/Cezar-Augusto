@@ -9,7 +9,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 const PROJECTS = [
-  { id: 1, title: "Cinematic Reel", category: "Video", video: "https://assets.mixkit.co/videos/preview/mixkit-abstract-motion-design-of-a-blue-sphere-44144-large.mp4", thumbnail: "https://picsum.photos/seed/reel/800/1000" },
+  { id: 1, title: "", category: "Video", video: "https://assets.mixkit.co/videos/preview/mixkit-abstract-motion-design-of-a-blue-sphere-44144-large.mp4", thumbnail: "https://picsum.photos/seed/reel/800/1000" },
   { id: 2, title: "Aerial View", category: "Drone", video: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-city-at-night-11-large.mp4", thumbnail: "https://picsum.photos/seed/aerial/800/1000" },
   { id: 3, title: "Brand Identity", category: "Design", video: "https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-446-large.mp4", thumbnail: "https://picsum.photos/seed/brand/800/1000" },
   { id: 4, title: "Motion Graphics", category: "After Effects", video: "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-blue-cube-44145-large.mp4", thumbnail: "https://picsum.photos/seed/motion/800/1000" },
