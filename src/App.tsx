@@ -59,9 +59,6 @@ const Navbar = () => {
             <motion.a
               key={item}
               href={`#${item.toLowerCase()}`}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
               className="text-[10px] uppercase tracking-[0.2em] font-medium hover:text-white/50 transition-colors"
             >
               {item}
@@ -107,20 +104,15 @@ const Hero = () => (
 
 const ProjectItem = ({ project }: { project: typeof PROJECTS[0] }) => {
   const itemRef = useRef(null);
-  
-  // O segredo está no offset: "target" (a imagem) em relação ao "container" (a tela)
   const { scrollYProgress: itemProgress } = useScroll({
     target: itemRef,
     offset: ["start end", "end start"] 
   });
 
-  // Ajustamos os valores: 
-  // 0.2 (entrando) -> Blur 15px
-  // 0.5 (centro da tela) -> Blur 0px (Nítido)
-  // 0.8 (saindo) -> Blur 15px
-  const blurValue = useTransform(itemProgress, [0.1, 0.5, 0.9], ["15px", "0px", "15px"]);
-  const scaleValue = useTransform(itemProgress, [0.1, 0.5, 0.9], [0.85, 1, 0.85]);
-  const opacityValue = useTransform(itemProgress, [0.1, 0.3, 0.7, 0.9], [0, 1, 1, 0]);
+  // Ajuste do Blur: 10px quando longe, 0px no centro (0.5), 10px ao sair
+  const blurValue = useTransform(itemProgress, [0.2, 0.5, 0.8], ["10px", "0px", "10px"]);
+  const scaleValue = useTransform(itemProgress, [0.2, 0.5, 0.8], [0.8, 1, 0.8]);
+  const opacityValue = useTransform(itemProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
 
   return (
     <motion.div
@@ -145,34 +137,6 @@ const ProjectItem = ({ project }: { project: typeof PROJECTS[0] }) => {
     </motion.div>
   );
 };
-
-  const blurValue = useTransform(itemProgress, [0, 0.5, 1], ["20px", "0px", "20px"]);
-  const scaleValue = useTransform(itemProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
-  const opacityValue = useTransform(itemProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-
-  return (
-    <motion.div
-      ref={itemRef}
-      style={{ 
-        filter: `blur(${blurValue.get()})`, 
-        scale: scaleValue,
-        opacity: opacityValue 
-      }}
-      className="project-card group flex-shrink-0"
-    >
-      <img 
-        src={project.thumbnail} 
-        alt={project.title} 
-        className="project-image"
-        loading="lazy" 
-      />
-      <div className="project-info">
-        <span className="level-tag">{project.category}</span>
-        <h3 className="text-2xl font-display font-bold uppercase">{project.title}</h3>
-      </div>
-    </motion.div>
-  );
-;
 
 const HorizontalGallery = () => {
   const targetRef = useRef(null);
