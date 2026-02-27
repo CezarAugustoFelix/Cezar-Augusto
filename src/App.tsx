@@ -9,22 +9,16 @@ function cn(...inputs: ClassValue[]) {
 }
 
 const PROJECTS = [
-  { 
-    id: 1, 
-    title: "Project Alpha", 
-    category: "Design", 
-    video: "", 
-    thumbnail: "./img/img.png" // Apontando para sua pasta local
-  }
-  { id: 2, title: "Aerial View", category: "Drone", video: "https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-city-at-night-11-large.mp4", thumbnail: "https://picsum.photos/seed/aerial/800/1000" },
-  { id: 3, title: "Brand Identity", category: "Design", video: "https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-446-large.mp4", thumbnail: "https://picsum.photos/seed/brand/800/1000" },
-  { id: 4, title: "Motion Graphics", category: "After Effects", video: "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-blue-cube-44145-large.mp4", thumbnail: "https://picsum.photos/seed/motion/800/1000" },
-  { id: 5, title: "Urban Capture", category: "Photography", video: "https://assets.mixkit.co/videos/preview/mixkit-city-traffic-at-night-44146-large.mp4", thumbnail: "https://picsum.photos/seed/urban/800/1000" },
-  { id: 6, title: "Nature Drone", category: "Drone", video: "https://assets.mixkit.co/videos/preview/mixkit-mountain-landscape-with-clouds-44147-large.mp4", thumbnail: "https://picsum.photos/seed/nature/800/1000" },
-  { id: 7, title: "Studio Session", category: "Photography", video: "https://assets.mixkit.co/videos/preview/mixkit-studio-lighting-setup-44148-large.mp4", thumbnail: "https://picsum.photos/seed/studio/800/1000" },
-  { id: 8, title: "Commercial Edit", category: "Video", video: "https://assets.mixkit.co/videos/preview/mixkit-commercial-product-shoot-44149-large.mp4", thumbnail: "https://picsum.photos/seed/commercial/800/1000" },
-  { id: 9, title: "Vector Art", category: "Design", video: "https://assets.mixkit.co/videos/preview/mixkit-vector-animation-process-44150-large.mp4", thumbnail: "https://picsum.photos/seed/vector/800/1000" },
-  { id: 10, title: "Final Cut", category: "Video", video: "https://assets.mixkit.co/videos/preview/mixkit-video-editing-software-interface-44151-large.mp4", thumbnail: "https://picsum.photos/seed/final/800/1000" },
+  { id: 1, title: "Arte 01", category: "Design Visual", thumbnail: "./img/img.png" },
+  { id: 2, title: "Arte 02", category: "Design Visual", thumbnail: "./img/img1.png" },
+  { id: 3, title: "Arte 03", category: "Design Visual", thumbnail: "./img/img2.png" },
+  { id: 4, title: "Arte 04", category: "Design Visual", thumbnail: "./img/img3.png" },
+  { id: 5, title: "Arte 05", category: "Design Visual", thumbnail: "./img/img4.png" },
+  { id: 6, title: "Arte 06", category: "Design Visual", thumbnail: "./img/img5.png" },
+  { id: 7, title: "Arte 07", category: "Design Visual", thumbnail: "./img/img6.png" },
+  { id: 8, title: "Arte 08", category: "Design Visual", thumbnail: "./img/img7.png" },
+  { id: 9, title: "Arte 09", category: "Design Visual", thumbnail: "./img/img8.png" },
+  { id: 10, title: "Arte 10", category: "Design Visual", thumbnail: "./img/img9.png" },
 ];
 
 const SKILLS = [
