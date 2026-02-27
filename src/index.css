@@ -112,3 +112,11 @@
   will-change: filter, transform; /* Otimiza a performance da placa de vídeo */
   transform: scale(1.02); /* Evita que a borda branca do blur apareça nas frestas */
 }
+
+.project-image {
+  @apply w-full h-full object-cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  will-change: filter, transform; /* Ajuda o navegador a processar o blur mais rápido */
+}
