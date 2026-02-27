@@ -121,27 +121,45 @@ const HorizontalGallery = () => {
             </h2>
           </div>
           
-          {PROJECTS.map((project) => (
-            <div 
-              key={project.id} 
-              className="relative flex-shrink-0 w-[400px] aspect-[1080/1350] bg-[#161616] group overflow-hidden"
-            >
-              <img 
-                src={project.thumbnail} 
-                alt={project.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                <span className="text-[10px] uppercase tracking-widest text-white/50 mb-2">{project.category}</span>
-                <h3 className="text-2xl font-display font-bold uppercase">{project.title}</h3>
-              </div>
-            </div>
-          ))}
-        </motion.div>
+          {PROJECTS.map((project, index) => {
+  // Criamos um hook de referência para cada imagem individualmente
+  const itemRef = useRef(null);
+  const { scrollYProgress: itemProgress } = useScroll({
+    target: itemRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Efeito de Blur: Começa em 20px, fica 0px no centro da tela, e volta para 20px na saída
+  const blurValue = useTransform(itemProgress, [0, 0.5, 1], ["20px", "0px", "20px"]);
+  // Efeito de Escala: Começa menor e cresce quando chega no centro
+  const scaleValue = useTransform(itemProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  // Opacidade: Aparece suavemente
+  const opacityValue = useTransform(itemProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+
+  return (
+    <motion.div
+      key={project.id}
+      ref={itemRef}
+      style={{ 
+        filter: `blur(${blurValue.get()})`, 
+        scale: scaleValue,
+        opacity: opacityValue 
+      }}
+      className="project-card group"
+    >
+      <img 
+        src={project.thumbnail} 
+        alt={project.title} 
+        className="project-image"
+        loading="lazy" 
+      />
+      <div className="project-info">
+        <span className="level-tag">{project.category}</span>
+        <h3 className="text-2xl font-display font-bold uppercase">{project.title}</h3>
       </div>
-    </section>
+    </motion.div>
   );
-};
+})}
 
 const SkillItem = ({ skill, index }: { skill: typeof SKILLS[0], index: number }) => {
   const ref = useRef(null);

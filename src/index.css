@@ -106,3 +106,9 @@
 .glass:hover {
   @apply bg-white/10;
 }
+
+.project-image {
+  /* ... mantenha o que já tinha ... */
+  will-change: filter, transform; /* Otimiza a performance da placa de vídeo */
+  transform: scale(1.02); /* Evita que a borda branca do blur apareça nas frestas */
+}
