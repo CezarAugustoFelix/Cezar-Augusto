@@ -172,7 +172,7 @@ const ProjectItem = ({ project }: { project: typeof PROJECTS[0] }) => {
       </div>
     </motion.div>
   );
-};
+;
 
 const HorizontalGallery = () => {
   const targetRef = useRef(null);
