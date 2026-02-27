@@ -70,3 +70,21 @@
   font-weight: 800;
   text-transform: uppercase;
 }
+
+/* Container de cada arte no scroll horizontal */
+.project-card {
+  @apply flex-shrink-0; /* Impede que a imagem seja espremida */
+  width: 450px; /* Largura proporcional para telas desktop */
+  aspect-ratio: 1080 / 1350; /* Garante a proporção exata */
+}
+
+.project-image {
+  @apply w-full h-full object-cover border border-white/5;
+  /* Garante que a imagem ocupe o espaço 1080x1350 sem esticar */
+}
+
+/* Ajuste no Track para as 10 imagens */
+.horizontal-track {
+  @apply flex gap-16 px-[10vw] items-center;
+  /* Gap maior para dar o respiro de "Galeria de Elite" */
+}
