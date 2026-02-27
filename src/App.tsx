@@ -9,16 +9,16 @@ function cn(...inputs: ClassValue[]) {
 }
 
 const PROJECTS = [
-  { id: 1, title: "Arte 01", category: "Design Visual", thumbnail: "./img/img.png" },
-  { id: 2, title: "Arte 02", category: "Design Visual", thumbnail: "./img/img1.png" },
-  { id: 3, title: "Arte 03", category: "Design Visual", thumbnail: "./img/img2.png" },
-  { id: 4, title: "Arte 04", category: "Design Visual", thumbnail: "./img/img3.png" },
-  { id: 5, title: "Arte 05", category: "Design Visual", thumbnail: "./img/img4.png" },
-  { id: 6, title: "Arte 06", category: "Design Visual", thumbnail: "./img/img5.png" },
-  { id: 7, title: "Arte 07", category: "Design Visual", thumbnail: "./img/img6.png" },
-  { id: 8, title: "Arte 08", category: "Design Visual", thumbnail: "./img/img7.png" },
-  { id: 9, title: "Arte 09", category: "Design Visual", thumbnail: "./img/img8.png" },
-  { id: 10, title: "Arte 10", category: "Design Visual", thumbnail: "./img/img9.png" },
+  { id: 1, title: "Arte 01", category: "Design Visual", video: "", thumbnail: "./img/img.png" },
+  { id: 2, title: "Arte 02", category: "Design Visual", video: "", thumbnail: "./img/img1.png" },
+  { id: 3, title: "Arte 03", category: "Design Visual", video: "", thumbnail: "./img/img2.png" },
+  { id: 4, title: "Arte 04", category: "Design Visual", video: "", thumbnail: "./img/img3.png" },
+  { id: 5, title: "Arte 05", category: "Design Visual", video: "", thumbnail: "./img/img4.png" },
+  { id: 6, title: "Arte 06", category: "Design Visual", video: "", thumbnail: "./img/img5.png" },
+  { id: 7, title: "Arte 07", category: "Design Visual", video: "", thumbnail: "./img/img6.png" },
+  { id: 8, title: "Arte 08", category: "Design Visual", video: "", thumbnail: "./img/img7.png" },
+  { id: 9, title: "Arte 09", category: "Design Visual", video: "", thumbnail: "./img/img8.png" },
+  { id: 10, title: "Arte 10", category: "Design Visual", video: "", thumbnail: "./img/img9.png" }
 ];
 
 const SKILLS = [

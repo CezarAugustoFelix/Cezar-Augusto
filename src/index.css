@@ -62,3 +62,11 @@
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+.text-outline {
+  color: transparent !important;
+  -webkit-text-stroke: 1px #FFFFFF;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
