@@ -104,14 +104,25 @@ const Hero = () => (
 
 const ProjectItem = ({ project }: { project: typeof PROJECTS[0] }) => {
   const itemRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
   const { scrollYProgress: itemProgress } = useScroll({
     target: itemRef,
     offset: ["start end", "end start"] 
   });
 
-  // Ajuste do Blur: 10px quando longe, 0px no centro (0.5), 10px ao sair
-  const blurValue = useTransform(itemProgress, [0.2, 0.5, 0.8], ["10px", "0px", "10px"]);
-  const scaleValue = useTransform(itemProgress, [0.2, 0.5, 0.8], [0.8, 1, 0.8]);
+  // Otimização: No mobile o blur é menor para não pesar na performance
+  const blurValue = useTransform(
+    itemProgress, 
+    [0.2, 0.5, 0.8], 
+    [isMobile ? "4px" : "15px", "0px", isMobile ? "4px" : "15px"]
+  );
+
+  const scaleValue = useTransform(itemProgress, [0.2, 0.5, 0.8], [0.85, 1, 0.85]);
   const opacityValue = useTransform(itemProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
 
   return (
