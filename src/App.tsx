@@ -96,6 +96,7 @@ const Hero = () => (
         transition={{ delay: 0.8, duration: 1 }}
         className="max-w-xl mx-auto text-sm md:text-lg text-white/60 font-light tracking-wide leading-relaxed"
       >
+        Design. Código. Inteligência Artificial.
         Transformando briefings em resultados estéticos de excelência através de técnica e visão autoral.
       </motion.p>
     </div>
