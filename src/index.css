@@ -35,6 +35,25 @@
   }
 }
 
+/* --- RESPONSIVIDADE TOTAL (FIX NOME H1) --- */
+
+@media (max-width: 768px) {
+  /* Ajuste do nome para não quebrar a tela */
+  h1 {
+    font-size: 16vw !important; /* Reduzimos um pouco para caber */
+    line-height: 0.9 !important; /* Aproxima as linhas "CEZAR" e "AUGUSTO" */
+    letter-spacing: -0.04em !important; /* Aperta as letras para um visual mais 'elite' */
+  }
+
+  /* Ajuste do parágrafo abaixo do nome */
+  .max-w-xl.mx-auto {
+    font-size: 14px !important;
+    padding: 0 20px !important;
+  }
+
+  /* ... Mantenha o restante do seu CSS responsivo para a galeria e arsenal ... */
+}
+
 /* --- TIPOGRAFIA --- */
 .font-display {
   letter-spacing: -0.06em;
