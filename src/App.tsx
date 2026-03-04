@@ -23,9 +23,9 @@ const PROJECTS = [
 
 const SKILLS = [
   { name: "Adobe Premiere", level: 95, icon: <Video size={14} /> },
-  { name: "After Effects", level: 85, icon: <Layers size={14} /> },
-  { name: "Photoshop", level: 90, icon: <Camera size={14} /> },
-  { name: "Illustrator", level: 80, icon: <Cpu size={14} /> },
+  { name: "After Effects", level: 70, icon: <Layers size={14} /> },
+  { name: "Photoshop", level: 80, icon: <Camera size={14} /> },
+  { name: "Illustrator", level: 50, icon: <Cpu size={14} /> },
   { name: "Captação / Foto", level: 90, icon: <Camera size={14} /> },
   { name: "Drone", level: 85, icon: <Plane size={14} /> },
 ];
