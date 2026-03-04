@@ -84,7 +84,7 @@ const Hero = () => (
         className="mb-8"
       >
         <span className="text-[10px] uppercase tracking-[0.5em] text-white/40 block mb-6">
-          Design, Vídeo & Cinematografia Aérea
+          Design. Código. Inteligência Artificial.
         </span>
         <h1 className="text-[15vw] md:text-[12vw] font-display font-extrabold leading-[0.8] tracking-tighter uppercase">
           CEZAR <br /> AUGUSTO
@@ -96,7 +96,7 @@ const Hero = () => (
         transition={{ delay: 0.8, duration: 1 }}
         className="max-w-xl mx-auto text-sm md:text-lg text-white/60 font-light tracking-wide leading-relaxed"
       >
-        Design. Código. Inteligência Artificial.
+        
         Transformando briefings em resultados estéticos de excelência através de técnica e visão autoral.
       </motion.p>
     </div>
