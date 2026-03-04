@@ -4,7 +4,6 @@
 @theme {
   --font-display: "Syne", sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  
   --color-brand-bg: #0D0D0D;
   --color-brand-surface: #161616;
   --color-brand-text: #ffffff;
@@ -13,7 +12,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    cursor: crosshair; /* Cursor de precisão para combinar com o tema */
+    cursor: crosshair;
+    scrollbar-gutter: stable;
   }
   
   body {
@@ -21,19 +21,21 @@
     background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0d0d0d 100%);
   }
 
-  /* Efeito de Granulado/Noise para dar textura premium */
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.03;
-    z-index: 9999;
-    pointer-events: none;
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Average_Noise.png");
+  /* Otimização: Noise apenas em Desktop para poupar bateria do celular */
+  @media (min-width: 769px) {
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0.03;
+      z-index: 9999;
+      pointer-events: none;
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Average_Noise.png");
+    }
   }
 }
 
-/* --- TIPOGRAFIA DE ELITE --- */
+/* --- TIPOGRAFIA --- */
 .font-display {
   letter-spacing: -0.06em;
   line-height: 0.8;
@@ -46,11 +48,9 @@
   transition: -webkit-text-stroke 0.5s ease;
 }
 
-.text-outline:hover {
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 1);
-}
+.text-outline:hover { -webkit-text-stroke: 1px rgba(255, 255, 255, 1); }
 
-/* --- GALERIA 1080x1350 (O CORAÇÃO DO SITE) --- */
+/* --- GALERIA 1080x1350 --- */
 .project-card {
   @apply flex-shrink-0 relative overflow-hidden bg-brand-surface border border-white/5;
   width: 450px;
@@ -58,20 +58,21 @@
   transition: border 0.5s ease;
 }
 
-.project-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-}
+.project-card:hover { border-color: rgba(255, 255, 255, 0.2); }
 
 .project-image {
   @apply w-full h-full object-cover;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-  filter: grayscale(20%); /* Começa levemente dessaturado */
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+  will-change: filter, transform;
+  backface-visibility: hidden;
+  filter: grayscale(20%);
+  transform: scale(1.02);
 }
 
 .project-card:hover .project-image {
   transform: scale(1.1);
-  filter: grayscale(0%); /* Ganha cor total no hover */
-  opacity: 0.6 !important; /* Escurece para o texto subir */
+  filter: grayscale(0%);
+  opacity: 0.6 !important;
 }
 
 .project-info {
@@ -97,26 +98,29 @@
   box-shadow: 0 0 10px #fff;
 }
 
-/* --- GLASS EFFECT --- */
 .glass {
   @apply bg-white/5 backdrop-blur-xl border border-white/10;
   transition: background 0.3s ease;
 }
 
-.glass:hover {
-  @apply bg-white/10;
-}
+/* --- RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 768px) {
+  h1 { font-size: 16vw !important; }
+  
+  .relative.h-[400vh] { height: 250vh !important; } /* Scroll mais curto no mobile */
 
-.project-image {
-  /* ... mantenha o que já tinha ... */
-  will-change: filter, transform; /* Otimiza a performance da placa de vídeo */
-  transform: scale(1.02); /* Evita que a borda branca do blur apareça nas frestas */
-}
+  .project-card {
+    width: 85vw !important; /* Quase largura total no celular */
+    aspect-ratio: 1080 / 1350;
+  }
 
-.project-image {
-  @apply w-full h-full object-cover;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  backface-visibility: hidden;
-  -webkit-font-smoothing: subpixel-antialiased;
-  will-change: filter, transform; /* Ajuda o navegador a processar o blur mais rápido */
+  .project-info {
+    @apply opacity-100 translate-y-0 p-6; /* Informações sempre visíveis no mobile */
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+  }
+
+  .project-image {
+    filter: none !important; /* Desativa grayscale no mobile para economizar processamento */
+    transition: transform 0.5s ease;
+  }
 }
