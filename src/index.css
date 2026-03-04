@@ -21,7 +21,6 @@
     background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0d0d0d 100%);
   }
 
-  /* Noise apenas em Desktop */
   @media (min-width: 769px) {
     body::after {
       content: "";
@@ -35,7 +34,7 @@
   }
 }
 
-/* --- ESTILO GLOBAL H1 --- */
+/* --- ESTILO GLOBAL H1 (DESKTOP) --- */
 h1 {
   font-size: clamp(3rem, 12vw, 15rem); 
   line-height: 0.85;
@@ -43,11 +42,9 @@ h1 {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
   letter-spacing: -0.05em;
-  overflow-wrap: break-word;
-  word-break: break-word;
 }
 
-/* --- TIPOGRAFIA & CLASSES AUXILIARES --- */
+/* --- CLASSES AUXILIARES --- */
 .font-display {
   letter-spacing: -0.06em;
   line-height: 0.8;
@@ -115,14 +112,19 @@ h1 {
   box-shadow: 0 0 10px #fff;
 }
 
-/* --- RESPONSIVIDADE ÚNICA (FIX TOTAL MOBILE) --- */
+/* --- RESPONSIVIDADE ÚNICA (TODOS OS FIXES MOBILE AQUI) --- */
 @media (max-width: 768px) {
   h1 { 
-    font-size: 14vw !important; 
-    line-height: 0.9 !important;
-    letter-spacing: -0.04em !important;
+    font-size: 11vw !important; /* Tamanho reduzido para evitar quebra de sílaba */
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
     width: 100% !important;
     text-align: center;
+    white-space: nowrap; /* Garante que 'Augusto' não quebre ao meio */
+  }
+  
+  h1 br {
+    display: block; 
   }
 
   .max-w-xl.mx-auto {
@@ -130,6 +132,7 @@ h1 {
     padding: 0 20px !important;
   }
   
+  /* Ajuste de scroll e cards no mobile */
   .relative.h-[400vh] { height: 250vh !important; } 
 
   .project-card {
@@ -150,5 +153,11 @@ h1 {
   section {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
+  }
+
+  /* Garante que o Arsenal fique em uma coluna só */
+  #arsenal .grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
   }
 }
