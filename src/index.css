@@ -21,7 +21,7 @@
     background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0d0d0d 100%);
   }
 
-  /* Otimização: Noise apenas em Desktop para poupar bateria do celular */
+  /* Noise apenas em Desktop */
   @media (min-width: 769px) {
     body::after {
       content: "";
@@ -35,26 +35,19 @@
   }
 }
 
-/* --- RESPONSIVIDADE TOTAL (FIX NOME H1) --- */
-
-@media (max-width: 768px) {
-  /* Ajuste do nome para não quebrar a tela */
-  h1 {
-    font-size: 16vw !important; /* Reduzimos um pouco para caber */
-    line-height: 0.9 !important; /* Aproxima as linhas "CEZAR" e "AUGUSTO" */
-    letter-spacing: -0.04em !important; /* Aperta as letras para um visual mais 'elite' */
-  }
-
-  /* Ajuste do parágrafo abaixo do nome */
-  .max-w-xl.mx-auto {
-    font-size: 14px !important;
-    padding: 0 20px !important;
-  }
-
-  /* ... Mantenha o restante do seu CSS responsivo para a galeria e arsenal ... */
+/* --- ESTILO GLOBAL H1 --- */
+h1 {
+  font-size: clamp(3rem, 12vw, 15rem); 
+  line-height: 0.85;
+  text-transform: uppercase;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-/* --- TIPOGRAFIA --- */
+/* --- TIPOGRAFIA & CLASSES AUXILIARES --- */
 .font-display {
   letter-spacing: -0.06em;
   line-height: 0.8;
@@ -68,6 +61,11 @@
 }
 
 .text-outline:hover { -webkit-text-stroke: 1px rgba(255, 255, 255, 1); }
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  transition: background 0.3s ease;
+}
 
 /* --- GALERIA 1080x1350 --- */
 .project-card {
@@ -117,30 +115,40 @@
   box-shadow: 0 0 10px #fff;
 }
 
-.glass {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10;
-  transition: background 0.3s ease;
-}
-
-/* --- RESPONSIVIDADE (MOBILE) --- */
+/* --- RESPONSIVIDADE ÚNICA (FIX TOTAL MOBILE) --- */
 @media (max-width: 768px) {
-  h1 { font-size: 16vw !important; }
+  h1 { 
+    font-size: 14vw !important; 
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+    width: 100% !important;
+    text-align: center;
+  }
+
+  .max-w-xl.mx-auto {
+    font-size: 14px !important;
+    padding: 0 20px !important;
+  }
   
-  .relative.h-[400vh] { height: 250vh !important; } /* Scroll mais curto no mobile */
+  .relative.h-[400vh] { height: 250vh !important; } 
 
   .project-card {
-    width: 85vw !important; /* Quase largura total no celular */
+    width: 85vw !important; 
     aspect-ratio: 1080 / 1350;
   }
 
   .project-info {
-    @apply opacity-100 translate-y-0 p-6; /* Informações sempre visíveis no mobile */
+    @apply opacity-100 translate-y-0 p-6; 
     background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
   }
 
   .project-image {
-    filter: none !important; /* Desativa grayscale no mobile para economizar processamento */
+    filter: none !important; 
     transition: transform 0.5s ease;
   }
-}
 
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
