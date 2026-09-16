@@ -9,16 +9,16 @@ function cn(...inputs: ClassValue[]) {
 }
 
 const PROJECTS = [
-  { id: 1, title: "Arte 01", category: "Design Visual", thumbnail: "/img/img.png" },
-  { id: 2, title: "Arte 02", category: "Design Visual", thumbnail: "/img/img1.png" },
-  { id: 3, title: "Arte 03", category: "Design Visual", thumbnail: "/img/img2.png" },
-  { id: 4, title: "Arte 04", category: "Design Visual", thumbnail: "/img/img3.png" },
-  { id: 5, title: "Arte 05", category: "Design Visual", thumbnail: "/img/img4.png" },
-  { id: 6, title: "Arte 06", category: "Design Visual", thumbnail: "/img/img5.png" },
-  { id: 7, title: "Arte 07", category: "Design Visual", thumbnail: "/img/img6.png" },
-  { id: 8, title: "Arte 08", category: "Design Visual", thumbnail: "/img/img7.png" },
-  { id: 9, title: "Arte 09", category: "Design Visual", thumbnail: "/img/img8.png" },
-  { id: 10, title: "Arte 10", category: "Design Visual", thumbnail: "/img/img9.png" }
+  { id: 1, title: "Bravino", category: "Vinhos · Social", thumbnail: "/img/img.png" },
+  { id: 2, title: "Fascina", category: "Odontologia · Institucional", thumbnail: "/img/img1.png" },
+  { id: 3, title: "Nutrivanza", category: "Agro · Campanha", thumbnail: "/img/img2.png" },
+  { id: 4, title: "Bravino", category: "Vinhos · Conteúdo", thumbnail: "/img/img3.png" },
+  { id: 5, title: "Line Seguros", category: "Seguros · Campanha", thumbnail: "/img/img4.png" },
+  { id: 6, title: "Hot Wheels", category: "Colecionáveis · Lançamento", thumbnail: "/img/img5.png" },
+  { id: 7, title: "Dog & Cat", category: "Pet · Promoção", thumbnail: "/img/img6.png" },
+  { id: 8, title: "SynapsOne", category: "Tecnologia · Institucional", thumbnail: "/img/img7.png" },
+  { id: 9, title: "Moturial", category: "Motos · Campanha", thumbnail: "/img/img8.png" },
+  { id: 10, title: "Mini GT", category: "Colecionáveis · Lançamento", thumbnail: "/img/img9.png" }
 ];
 
 const SKILLS = [
@@ -66,10 +66,40 @@ const Navbar = () => {
           ))}
         </div>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-3 glass rounded-full">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={isOpen}
+          className="md:hidden p-3 glass rounded-full"
+        >
           {isOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden overflow-hidden"
+          >
+            <div className="flex flex-col gap-6 pt-8 pb-2">
+              {["Works", "Arsenal", "Touch"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setIsOpen(false)}
+                  className="text-[11px] uppercase tracking-[0.3em] font-medium text-white/70 hover:text-white transition-colors"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
