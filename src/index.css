@@ -90,12 +90,12 @@ h1 {
 }
 
 .project-info {
-  @apply absolute bottom-0 left-0 w-full p-10 z-10 transition-all duration-700 opacity-0 translate-y-8;
-  background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  @apply absolute bottom-0 left-0 w-full p-10 z-10 transition-all duration-700 opacity-100 translate-y-0;
+  background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.78) 32%, rgba(0,0,0,0) 68%);
 }
 
 .project-card:hover .project-info {
-  @apply opacity-100 translate-y-0;
+  background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0) 75%);
 }
 
 /* --- ARSENAL / SKILLS --- */
