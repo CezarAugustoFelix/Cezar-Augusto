@@ -1,285 +1,253 @@
-import { motion, useScroll, useTransform, AnimatePresence, useInView } from "motion/react";
-import { ArrowUpRight, Camera, Cpu, Video, Layers, MousePointer2, Plane, Menu, X } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-const PROJECTS = [
-  { id: 1, title: "Bravino", category: "Vinhos · Social", thumbnail: "/img/img.png" },
-  { id: 2, title: "Fascina", category: "Odontologia · Institucional", thumbnail: "/img/img1.png" },
-  { id: 3, title: "Nutrivanza", category: "Agro · Campanha", thumbnail: "/img/img2.png" },
-  { id: 4, title: "Bravino", category: "Vinhos · Conteúdo", thumbnail: "/img/img3.png" },
-  { id: 5, title: "Line Seguros", category: "Seguros · Campanha", thumbnail: "/img/img4.png" },
-  { id: 6, title: "Hot Wheels", category: "Colecionáveis · Lançamento", thumbnail: "/img/img5.png" },
-  { id: 7, title: "Dog & Cat", category: "Pet · Promoção", thumbnail: "/img/img6.png" },
-  { id: 8, title: "SynapsOne", category: "Tecnologia · Institucional", thumbnail: "/img/img7.png" },
-  { id: 9, title: "Moturial", category: "Motos · Campanha", thumbnail: "/img/img8.png" },
-  { id: 10, title: "Mini GT", category: "Colecionáveis · Lançamento", thumbnail: "/img/img9.png" }
+const WORKS = [
+  { img: "/img/img.png", client: "Bravino", kind: "Vinhos · Social" },
+  { img: "/img/img1.png", client: "Fascina", kind: "Odontologia · Institucional" },
+  { img: "/img/img2.png", client: "Nutrivanza", kind: "Agro · Campanha" },
+  { img: "/img/img3.png", client: "Bravino", kind: "Vinhos · Conteúdo" },
+  { img: "/img/img4.png", client: "Line Seguros", kind: "Seguros · Campanha" },
+  { img: "/img/img5.png", client: "Hot Wheels", kind: "Colecionáveis · Lançamento" },
+  { img: "/img/img6.png", client: "Dog & Cat", kind: "Pet · Promoção" },
+  { img: "/img/img7.png", client: "SynapsOne", kind: "Tecnologia · Institucional" },
+  { img: "/img/img8.png", client: "Moturial", kind: "Motos · Campanha" },
+  { img: "/img/img9.png", client: "Mini GT", kind: "Colecionáveis · Lançamento" },
 ];
 
-const SKILLS = [
-  { name: "Adobe Premiere", level: 95, icon: <Video size={14} /> },
-  { name: "After Effects", level: 70, icon: <Layers size={14} /> },
-  { name: "Photoshop", level: 80, icon: <Camera size={14} /> },
-  { name: "Illustrator", level: 50, icon: <Cpu size={14} /> },
-  { name: "Captação / Foto", level: 90, icon: <Camera size={14} /> },
-  { name: "Drone", level: 85, icon: <Plane size={14} /> },
+const SERVICES = [
+  {
+    title: "Vídeo",
+    body: "Captação, edição e finalização de reels, depoimentos, institucionais e cobertura de evento. Do roteiro à entrega pronta para publicar.",
+  },
+  {
+    title: "Motion graphics",
+    body: "Animação de logo, vinheta, abertura, legenda animada e peças em movimento para redes sociais e telas.",
+  },
+  {
+    title: "Design gráfico",
+    body: "Identidade visual, campanha, criativo para tráfego pago e cronograma mensal de conteúdo.",
+  },
+  {
+    title: "Mídia out-of-home",
+    body: "Peças para painel de LED, totem de elevador e formatos verticais, adaptadas para leitura à distância.",
+  },
+  {
+    title: "Fotografia",
+    body: "Ensaio, evento e produto, com tratamento e seleção entregues prontos para uso.",
+  },
+  {
+    title: "Captação aérea",
+    body: "Imagens de drone para institucional, imóvel e evento, integradas ao mesmo acabamento do material em solo.",
+  },
 ];
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+const CLIENTS = [
+  "Drako Academia",
+  "Bravino Wine Concept",
+  "Instituto Ferrari",
+  "Partmed",
+  "SynapsOne",
+  "ATA Curitiba",
+  "Nutrivanza",
+  "Fascina",
+  "Line Seguros",
+  "Moturial",
+  "Dog & Cat Company",
+  "Prefeitura de Rolândia",
+];
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+const NUMBERS = [
+  { value: "15+", label: "anos de estrada" },
+  { value: "9", label: "segmentos atendidos" },
+  { value: "3", label: "cidades cobertas" },
+];
 
+function Nav() {
   return (
-    <nav className={cn(
-      "fixed top-0 left-0 w-full z-50 px-6 py-6 transition-all duration-500",
-      scrolled ? "bg-[#0D0D0D]/80 backdrop-blur-md py-4" : "bg-transparent"
-    )}>
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-display font-bold tracking-tighter"
-        >
-          CEZAR AUGUSTO<span className="text-white/30">.</span>
-        </motion.div>
-        
-        <div className="hidden md:flex gap-10 items-center">
-          {["Works", "Arsenal", "Touch"].map((item, i) => (
-            <motion.a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-[10px] uppercase tracking-[0.2em] font-medium hover:text-white/50 transition-colors"
-            >
-              {item}
-            </motion.a>
-          ))}
-        </div>
-
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={isOpen}
-          className="md:hidden p-3 glass rounded-full"
-        >
-          {isOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
+    <nav className="nav">
+      <div className="wrap nav-in">
+        <span className="mark">
+          Cezar Augusto<i>.</i>
+        </span>
+        <ul className="nav-links">
+          <li>
+            <a href="#trabalhos">Trabalhos</a>
+          </li>
+          <li>
+            <a href="#servicos">Serviços</a>
+          </li>
+          <li>
+            <a href="#sobre">Sobre</a>
+          </li>
+        </ul>
+        <a className="pill" href="#contato">
+          Fazer um orçamento
+        </a>
       </div>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden overflow-hidden"
-          >
-            <div className="flex flex-col gap-6 pt-8 pb-2">
-              {["Works", "Arsenal", "Touch"].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  onClick={() => setIsOpen(false)}
-                  className="text-[11px] uppercase tracking-[0.3em] font-medium text-white/70 hover:text-white transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
   );
-};
+}
 
-const Hero = () => (
-  <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-6">
-    <div className="text-center z-10">
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-8"
-      >
-        <span className="text-[10px] uppercase tracking-[0.5em] text-white/40 block mb-6">
-          Design. Código. Inteligência Artificial.
-        </span>
-        <h1 className="text-[15vw] md:text-[12vw] font-display font-extrabold leading-[0.8] tracking-tighter uppercase">
-          CEZAR <br /> AUGUSTO
-        </h1>
-      </motion.div>
-      <motion.p 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 1 }}
-        className="max-w-xl mx-auto text-sm md:text-lg text-white/60 font-light tracking-wide leading-relaxed"
-      >
-        
-        Transformando briefings em resultados estéticos de excelência através de técnica e visão autoral.
-      </motion.p>
-    </div>
-  </section>
-);
-
-const ProjectItem = ({ project }: { project: typeof PROJECTS[0] }) => {
-  const itemRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
-
-  const { scrollYProgress: itemProgress } = useScroll({
-    target: itemRef,
-    offset: ["start end", "end start"] 
-  });
-
-  // Otimização: No mobile o blur é menor para não pesar na performance
-  const blurValue = useTransform(
-    itemProgress, 
-    [0.2, 0.5, 0.8], 
-    [isMobile ? "4px" : "15px", "0px", isMobile ? "4px" : "15px"]
-  );
-
-  const scaleValue = useTransform(itemProgress, [0.2, 0.5, 0.8], [0.85, 1, 0.85]);
-  const opacityValue = useTransform(itemProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
-
+function Hero() {
   return (
-    <motion.div
-      ref={itemRef}
-      style={{ 
-        filter: useTransform(blurValue, (v) => `blur(${v})`), 
-        scale: scaleValue,
-        opacity: opacityValue 
-      }}
-      className="project-card group flex-shrink-0"
-    >
-      <img 
-        src={project.thumbnail} 
-        alt={project.title} 
-        className="project-image"
-        loading="lazy" 
-      />
-      <div className="project-info">
-        <span className="level-tag">{project.category}</span>
-        <h3 className="text-2xl font-display font-bold uppercase">{project.title}</h3>
-      </div>
-    </motion.div>
-  );
-};
-
-const HorizontalGallery = () => {
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: targetRef });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
-
-  return (
-    <section id="works" ref={targetRef} className="relative h-[400vh]">
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-12 px-[10vw]">
-          <div className="flex flex-col justify-center min-w-[30vw]">
-            <span className="text-[10px] uppercase tracking-[0.5em] text-white/30 block mb-8">Portfolio</span>
-            <h2 className="text-7xl md:text-9xl font-display font-bold tracking-tighter uppercase leading-none">
-              The <br /> <span className="text-white/30 italic">Gallery</span>
-            </h2>
-          </div>
-          {PROJECTS.map((project) => (
-            <ProjectItem key={project.id} project={project} />
+    <header className="hero wrap">
+      <p className="eyebrow">Londrina · Paraná</p>
+      <h1>
+        Design e vídeo para marcas que <b>não passam despercebidas.</b>
+      </h1>
+      <div className="hero-grid">
+        <div className="hero-numbers">
+          {NUMBERS.map((n) => (
+            <div className="num" key={n.label}>
+              <strong>{n.value}</strong>
+              <span>{n.label}</span>
+            </div>
           ))}
-        </motion.div>
+        </div>
+        <div className="hero-side">
+          <p>
+            Sou videomaker e designer gráfico. Faço captação, edição, motion e
+            identidade visual — do reels de quinze segundos ao painel de LED na
+            rua. Quinze anos atendendo cliente direto e agência.
+          </p>
+          <a className="pill solid" href="#trabalhos">
+            Ver os trabalhos
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function Works() {
+  return (
+    <section id="trabalhos" className="wrap">
+      <p className="eyebrow">Trabalhos</p>
+      <h2>
+        Peças que <b>foram para a rua</b>.
+      </h2>
+      <div className="works">
+        {WORKS.map((w) => (
+          <figure className="work" key={w.img}>
+            <a href={w.img} target="_blank" rel="noreferrer">
+              <span className="work-frame">
+                <img src={w.img} alt={`${w.client} — ${w.kind}`} loading="lazy" />
+              </span>
+            </a>
+            <figcaption>
+              <span className="work-kind">{w.kind}</span>
+              <span className="work-client">{w.client}</span>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </section>
   );
-};
+}
 
-const SkillItem = ({ skill, index }: { skill: typeof SKILLS[0], index: number }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
+function Services() {
   return (
-    <div ref={ref} className="space-y-4">
-      <div className="flex justify-between items-end">
-        <div className="flex items-center gap-3">
-          <span className="text-white/30">{skill.icon}</span>
-          <h4 className="text-sm uppercase tracking-widest font-bold">{skill.name}</h4>
-        </div>
-        <span className="text-xs font-mono font-bold">{skill.level}%</span>
-      </div>
-      <div className="w-full h-[2px] bg-white/10 relative overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-          transition={{ duration: 1.5, delay: index * 0.1 }}
-          className="h-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.5)]"
-        />
-      </div>
-    </div>
-  );
-};
-
-const Arsenal = () => (
-  <section id="arsenal" className="py-32 px-6 max-w-7xl mx-auto">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
-      <div>
-        <span className="level-tag">System Stats</span>
-        <h2 className="text-6xl md:text-8xl font-display font-bold tracking-tighter uppercase mb-10 leading-none">
-          Skills & <br /> <span className="text-white/30 italic">Arsenal</span>
-        </h2>
-      </div>
-      <div className="grid grid-cols-1 gap-10">
-        {SKILLS.map((skill, i) => <SkillItem key={skill.name} skill={skill} index={i} />)}
-      </div>
-    </div>
-  </section>
-);
-
-const Touch = () => (
-  <section id="touch" className="py-32 px-6 max-w-7xl mx-auto">
-    <div className="glass p-16 md:p-32 rounded-none text-center relative overflow-hidden">
-      <h2 className="text-7xl md:text-[10rem] font-display font-bold tracking-tighter uppercase mb-20 leading-[0.8]">
-        Let's build <br /> 
-        <span className="text-outline">Impact</span>
+    <section id="servicos" className="wrap">
+      <p className="eyebrow">Serviços</p>
+      <h2>
+        Da câmera ao <b>arquivo final</b>.
       </h2>
-      <div className="flex flex-wrap justify-center gap-6">
-        {[
-          { label: "WhatsApp", href: "https://wa.me/5543999859044" },
-          { label: "Behance", href: "https://behance.net/cezaraugustofelix" },
-          { label: "LinkedIn", href: "https://linkedin.com/in/cezaraugustofelix/" },
-        ].map((link) => (
-          <a key={link.label} href={link.href} target="_blank" className="px-12 py-6 glass text-[10px] uppercase tracking-widest font-bold hover:bg-white hover:text-black transition-all flex items-center gap-4">
-            {link.label} <ArrowUpRight size={18} />
-          </a>
+      <div className="services">
+        {SERVICES.map((s) => (
+          <article className="service" key={s.title}>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </article>
         ))}
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+}
+
+function About() {
+  return (
+    <section id="sobre" className="wrap">
+      <p className="eyebrow">Sobre</p>
+      <div className="two">
+        <h2>
+          Quem atende é quem <b>edita</b>.
+        </h2>
+        <div>
+          <p className="lede">
+            Comecei captando vídeo de evento em 2008 e nunca saí da ilha de
+            edição. Passei por prefeitura, por agência e por cliente direto, e
+            hoje produzo o audiovisual de uma rede de academias com unidades em
+            Londrina, Maringá e Cambé.
+          </p>
+          <p className="lede">
+            Também sou formado em Análise e Desenvolvimento de Sistemas, e uso
+            isso a favor do trabalho: construo minhas próprias ferramentas de
+            automação para entregar mais rápido sem abrir mão do acabamento.
+          </p>
+          <a className="pill" href="https://cezar-dev.vercel.app" target="_blank" rel="noreferrer">
+            Ver o lado desenvolvedor
+          </a>
+        </div>
+      </div>
+      <div className="clients">
+        <p className="eyebrow small">Marcas atendidas</p>
+        <ul>
+          {CLIENTS.map((c) => (
+            <li key={c}>{c}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contato" className="wrap contato">
+      <p className="eyebrow">Contato</p>
+      <h2>
+        Me conta o que você <b>precisa gravar</b>.
+      </h2>
+      <div className="acoes">
+        <a className="pill solid" href="https://wa.me/5543999859044" target="_blank" rel="noreferrer">
+          WhatsApp
+        </a>
+        <a className="pill" href="mailto:cezaraugustofelix90@gmail.com">
+          E-mail
+        </a>
+        <a className="pill" href="https://behance.net/cezaraugustofelix" target="_blank" rel="noreferrer">
+          Behance
+        </a>
+        <a className="pill" href="https://linkedin.com/in/cezaraugustofelix" target="_blank" rel="noreferrer">
+          LinkedIn
+        </a>
+      </div>
+    </section>
+  );
+}
 
 export default function App() {
   return (
-    <div className="bg-[#0D0D0D] text-white selection:bg-white selection:text-black">
-      <Navbar />
-      <main>
-        <Hero />
-        <HorizontalGallery />
-        <Arsenal />
-        <Touch />
-      </main>
-      <footer className="py-16 px-6 text-center text-[9px] uppercase tracking-[0.4em] text-white/20">
-        © 2026 CEZAR AUGUSTO FELIX. VISUAL EXCELLENCE.
-      </footer>
-    </div>
+    <>
+      <div className="glow a" aria-hidden="true" />
+      <div className="glow b" aria-hidden="true" />
+      <div className="shell">
+        <Nav />
+        <main>
+          <Hero />
+          <Works />
+          <Services />
+          <About />
+          <Contact />
+        </main>
+        <div className="wrap">
+          <footer>
+            <span>Cezar Augusto Felix · Londrina, Paraná</span>
+            <span>
+              <a href="mailto:cezaraugustofelix90@gmail.com">
+                cezaraugustofelix90@gmail.com
+              </a>
+            </span>
+          </footer>
+        </div>
+      </div>
+    </>
   );
 }
